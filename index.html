@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#070a14">
+    <meta name="description" content="Tetris arcade aux couleurs néon.">
+    <title>TETRIS — Arcade néon</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="page-glow page-glow--left" aria-hidden="true"></div>
+    <div class="page-glow page-glow--right" aria-hidden="true"></div>
+
+    <main class="arcade">
+        <header class="masthead">
+            <p class="eyebrow">Salle d'arcade · depuis 1984</p>
+            <h1 class="logo">TETRIS</h1>
+            <p class="subtitle">Empilez. Effacez. Recommencez.</p>
+        </header>
+
+        <div class="mode-picker">
+            <div class="mode-picker__group">
+                <label for="game-mode">Mode de jeu</label>
+                <select id="game-mode">
+                    <option value="0">Solo</option>
+                    <option value="1">Contre 1 adversaire</option>
+                    <option value="2">Contre 2 adversaires</option>
+                    <option value="3">Contre 3 adversaires</option>
+                </select>
+            </div>
+            <div class="mode-picker__group" id="difficulty-picker" hidden>
+                <label for="ai-difficulty">Difficulté IA</label>
+                <select id="ai-difficulty">
+                    <option value="beginner">Débutant</option>
+                    <option value="intermediate">Intermédiaire</option>
+                    <option value="expert">Expert</option>
+                </select>
+            </div>
+        </div>
+
+        <section class="game-layout" aria-label="Jeu Tetris">
+            <aside class="side-panel stats-panel" aria-label="Statistiques de la partie">
+                <h2 class="panel-heading">Tableau de bord</h2>
+                <div class="stat-card stat-card--score">
+                    <span class="stat-label">Score</span>
+                    <strong class="stat-value" id="score">0</strong>
+                </div>
+                <div class="stat-card stat-card--level">
+                    <span class="stat-label">Niveau</span>
+                    <strong class="stat-value" id="level">1</strong>
+                </div>
+                <div class="stat-card stat-card--lines">
+                    <span class="stat-label">Lignes</span>
+                    <strong class="stat-value" id="lines">0</strong>
+                </div>
+                <div class="controls-hint">
+                    <span class="hint-orbit" aria-hidden="true">✦</span>
+                    <p>Votre prochaine partie vous attend.</p>
+                </div>
+            </aside>
+
+            <section class="board-shell" aria-label="Plateau de jeu">
+                <div class="board-topline">
+                    <span class="live-indicator" aria-hidden="true"></span>
+                    <span>ZONE DE JEU</span>
+                    <span class="board-dimensions">10 × 20</span>
+                </div>
+                <div class="board-frame">
+                    <canvas
+                        id="game-board"
+                        width="300"
+                        height="600"
+                        aria-label="Grille Tetris de 10 colonnes et 20 lignes"
+                    ></canvas>
+                    <div class="game-over" id="game-over" role="status" hidden></div>
+                </div>
+                <p class="board-caption">Un coup à la fois. La légende, elle, est éternelle.</p>
+            </section>
+
+            <aside class="side-panel next-panel" aria-label="Pièce suivante et commandes">
+                <h2 class="panel-heading">À venir</h2>
+                <div class="preview-card">
+                    <span class="stat-label">Prochaine pièce</span>
+                    <canvas
+                        id="next-piece"
+                        width="144"
+                        height="120"
+                        aria-label="Aperçu de la prochaine pièce"
+                    ></canvas>
+                </div>
+                <div class="action-buttons" aria-label="Commandes de partie">
+                    <button id="start-button" class="action-button action-button--start" type="button">Démarrer</button>
+                    <button id="pause-button" class="action-button action-button--pause" type="button">Pause</button>
+                    <button id="restart-button" class="action-button action-button--restart" type="button">Recommencer</button>
+                </div>
+                <p class="status-note">Prêt·e pour le défi ?</p>
+            </aside>
+        </section>
+
+        <section
+            id="multiplayer-games"
+            class="multiplayer-section"
+            aria-label="Parties multijoueur"
+            hidden
+        >
+            <h2 class="panel-heading">Arène multijoueur</h2>
+            <section class="multiplayer-results" aria-live="polite" hidden></section>
+            <div class="multiplayer-grid"></div>
+        </section>
+
+        <footer class="footer">
+            <span>ARCADE NÉON</span>
+            <span class="footer-separator" aria-hidden="true">✦</span>
+            <span>Faites entrer la lumière</span>
+        </footer>
+    </main>
+        <script type="module" src="./main.js"></script>
+</body>
+</html>
